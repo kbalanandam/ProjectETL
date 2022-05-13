@@ -2,4 +2,4 @@ csvtodb/__pycache__/
 csvtodb/test.py
 csvtodb/Jsontest.py
 csvtodb/*.log
-csvtodb/dbAuth.py
+
