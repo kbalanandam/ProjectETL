@@ -16,7 +16,6 @@ def main():
                                 format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
             logging.info('csv file found: ' + x)
             Config.FileCount = Config.FileCount + 1
-            # Prints only text file present in My Folder
 
             if preValidation.validation(x):
                 logging.info('file: ' + x + ' validation completed successfully.')
@@ -26,8 +25,6 @@ def main():
                 logging.info('file: ' + x + ' process completed successfully.')
             else:
                 logging.info('file: ' + x + ' process failed.')
-            #logging.disable(level=logging.INFO)
-    #logging.info('--- file(s) process completed successfully ---')
 
 
 if __name__ == '__main__':
