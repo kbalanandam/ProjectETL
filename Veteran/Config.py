@@ -14,6 +14,7 @@ fileConfig = {
         "errorpath": "D:/Veteran/Data/Reject/",
         "filepath": "D:/Veteran/Data/",
         "validpath": "D:/Veteran/Data/Valid/",
+        "logfilepath": "D:/Veteran/Data/Logs/",
         "extension" : ".DAT",
         "delimiter" :","
     }
