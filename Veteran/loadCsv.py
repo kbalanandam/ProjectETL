@@ -23,8 +23,8 @@ def fileload():
                                                          password=dbConfig['password'])
                     try:
                         if connection.is_connected():
-                            db_Info = connection.get_server_info()
-                            print(str(datetime.now()) + ": Connected to MySQL Server version ", db_Info)
+                            dbinfo = connection.get_server_info()
+                            print(str(datetime.now()) + ": Connected to MySQL Server version ", dbinfo)
                             cursor = connection.cursor()
 
                         print(str(datetime.now()) + ": Reading file -> ", fileConfig['validpath'] + x)
@@ -59,6 +59,7 @@ def fileload():
         print(e)
     finally:
         sys.exit()
+
 
 if __name__ == '__main__':
     fileload()
