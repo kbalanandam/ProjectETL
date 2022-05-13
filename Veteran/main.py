@@ -1,15 +1,17 @@
-import preValidation, loadCsv
+import preValidation
+import loadCsv
 from datetime import datetime
 import logging
-import os, sys
+import os
 import Config
-from Config import dbConfig, fileConfig
+from Config import fileConfig
+
 
 def main():
     for x in os.listdir(fileConfig['filepath']):
         if x.endswith(".DAT"):
-            logtime = datetime.now()
-            logfile = 'csvProcess_'+logtime.strftime('%Y%m%d%H%M%S')+'.log'
+            localtime = datetime.now()
+            logfile = 'csvProcess_'+localtime.strftime('%Y%m%d%H%M%S')+'.log'
             logging.basicConfig(filename=logfile, level=logging.INFO,
                                 format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
             logging.info('csv file found: ' + x)
@@ -26,7 +28,6 @@ def main():
                 logging.info('file: ' + x + ' process failed.')
             #logging.disable(level=logging.INFO)
     #logging.info('--- file(s) process completed successfully ---')
-
 
 
 if __name__ == '__main__':

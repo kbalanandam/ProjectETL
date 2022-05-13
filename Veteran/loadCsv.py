@@ -2,8 +2,8 @@ import logging
 import csv
 import mysql.connector
 from mysql.connector import Error
-from Config import dbConfig, fileConfig
-from datetime import datetime
+from Config import dbConfig
+from Config import fileConfig
 name = __name__
 
 

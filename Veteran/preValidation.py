@@ -1,5 +1,4 @@
 import csv
-import sys
 import Config
 import shutil
 from Config import fileConfig
