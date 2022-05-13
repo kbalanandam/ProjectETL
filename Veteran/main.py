@@ -9,7 +9,7 @@ from Config import fileConfig
 
 def main():
     for x in os.listdir(fileConfig['filepath']):
-        if x.endswith(".DAT"):
+        if x.endswith(fileConfig['extension']):
             localtime = datetime.now()
             logfile = 'csvProcess_'+localtime.strftime('%Y%m%d%H%M%S')+'.log'
             logging.basicConfig(filename=logfile, level=logging.INFO,
