@@ -1,5 +1,5 @@
-Veteran/__pycache__/
-Veteran/test.py
-veteran/Jsontest.py
-veteran/*.log
-veteran/dbAuth.py
+csvtodb/__pycache__/
+csvtodb/test.py
+csvtodb/Jsontest.py
+csvtodb/*.log
+csvtodb/dbAuth.py
