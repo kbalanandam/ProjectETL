@@ -17,17 +17,19 @@ def fileload():
                 Config.FileCount = Config.FileCount + 1
                 # Prints only text file present in My Folder
                 try:
+
                     connection = mysql.connector.connect(host=dbConfig['host'],
                                                          database=dbConfig['database'],
                                                          user=dbConfig['user'],
                                                          password=dbConfig['password'])
-                    try:
-                        if connection.is_connected():
-                            dbinfo = connection.get_server_info()
-                            print(str(datetime.now()) + ": Connected to MySQL Server version ", dbinfo)
-                            cursor = connection.cursor()
+                    if connection.is_connected():
+                        dbinfo = connection.get_server_info()
+                        print(str(datetime.now()) + ": Connected to MySQL Server database version ", dbinfo)
+                    cursor = connection.cursor()
 
-                        print(str(datetime.now()) + ": Reading file -> ", fileConfig['validpath'] + x)
+                    try:
+
+                        print(str(datetime.now()) + ": Processing file -> ", fileConfig['validpath'] + x)
 
                         with open(fileConfig['validpath'] + x, "r") as csv_file:
                             csv_reader = csv.reader(csv_file, delimiter=fileConfig['delimiter'])
@@ -42,23 +44,21 @@ def fileload():
                         if connection.is_connected():
                             cursor.close()
                             connection.close()
-                            print(str(datetime.now()) + ": MySQL connection is closed")
-
-                    if connection.is_connected():
-                        cursor.close()
-                        connection.close()
-                        print(str(datetime.now()) + ": MySQL connection is closed")
+                            print(str(datetime.now()) + ": MySQL connection is closed due to error(s)")
 
                 except Error as e:
                     print(str(datetime.now()) + ": Error while connecting to MySQL", e)
                     if connection.is_connected():
                         cursor.close()
                         connection.close()
-                        print(str(datetime.now()) + ": MySQL connection is closed")
+                        print(str(datetime.now()) + ": MySQL connection is closed due to error(s)")
+
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print(str(datetime.now()) + ": MySQL connection is closed")
     except Exception as e:
         print(e)
-    finally:
-        sys.exit()
 
 
 if __name__ == '__main__':
