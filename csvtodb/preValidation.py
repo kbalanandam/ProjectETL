@@ -7,6 +7,8 @@ name = __name__
 
 
 def validation(filename):
+    # before processing each file to db, will get validated here and cleansed as per rules listed in fileConfig.
+    # segregate file into valid and error, send them to respective folders to process further
     try:
         with open(fileConfig['validpath'] + filename, 'w+') as nf:
             with open(fileConfig['errorpath'] + filename + '.error', 'w+') as ef:
