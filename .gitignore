@@ -2,3 +2,4 @@ Veteran/__pycache__/
 Veteran/test.py
 veteran/Jsontest.py
 veteran/*.log
+veteran/dbAuth.py
