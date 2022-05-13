@@ -1,2 +1,3 @@
 # ProjectETL
 This is to keep my Python learings ...
+csvtodb - this folder contains the solution for loading the data from each csv file from source folder configured and load them to the db. Erros records from data files will be cleansed if any are there, to the location configured in fileConfig and valid records sends for process further. Each step executed throuhgt out process will be logged to the log file using logger module of Python.
