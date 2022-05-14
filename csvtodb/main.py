@@ -19,12 +19,14 @@ def main():
 
             if preValidation.validation(x):
                 logging.info('file: ' + x + ' validation completed successfully.')
+                if loadCsv.fileload(x):
+                    logging.info('file: ' + x + ' process completed successfully.')
+                else:
+                    logging.info('file: ' + x + ' process failed.')
             else:
                 logging.info('file: ' + x + ' validation failed.')
-            if loadCsv.fileload(x):
-                logging.info('file: ' + x + ' process completed successfully.')
-            else:
-                logging.info('file: ' + x + ' process failed.')
+
+    logging.info(str(Config.FileCount) + ' file(s) are processed.')
 
 
 if __name__ == '__main__':
