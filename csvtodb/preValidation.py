@@ -15,7 +15,7 @@ def validation(filename):
                 with open(fileConfig['filepath'] + filename, 'r') as f:
                     logging.info('Reading file -> ' + fileConfig['filepath'] + filename)
 
-                    reader = csv.reader(f, delimiter=',')
+                    reader = csv.reader(f, delimiter=fileConfig['delimiter'])
                     for row in reader:
                         if len(row) < Config.FieldCount:
                             ef.write('error: Not enough fields are provided: ' + str(reader.line_num) + '\n')
@@ -40,5 +40,3 @@ def validation(filename):
     except csv.Error as e:
         logging.error('Program: '+name+',   file: {}, line {}: {}'.format(filename, reader.line_num, e))
         return False
-
-
