@@ -2,16 +2,19 @@ import preValidation
 import loadCsv
 from datetime import datetime
 import logging
+import csv
 import os
 import Config
 from Config import fileConfig
+
+name = __name__
 
 
 def main():
     for x in os.listdir(fileConfig['filepath']):
         if x.endswith(fileConfig['extension']):
             localtime = datetime.now()
-            logfile = 'csvProcess_'+localtime.strftime('%Y%m%d%H%M%S')+'.log'
+            logfile = 'csvProcess_' + localtime.strftime('%Y%m%d%H%M%S') + '.log'
             logging.basicConfig(filename=logfile, level=logging.INFO,
                                 format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
             logging.info('csv file found: ' + x)

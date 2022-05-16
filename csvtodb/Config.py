@@ -1,12 +1,11 @@
 
 FileCount = 0
 FilesFailed = 0
-FieldCount = 4
 
 dbConfig = {
         "database": "mydb",
         "host": "localhost",
-        "password": "root",
+        "password": "root1",
         "user": "root"
 }
 fileConfig = {
