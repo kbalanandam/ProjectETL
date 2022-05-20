@@ -5,7 +5,7 @@ FilesFailed = 0
 dbConfig = {
         "database": "mydb",
         "host": "localhost",
-        "password": "root1",
+        "password": "root",
         "user": "root"
 }
 fileConfig = {

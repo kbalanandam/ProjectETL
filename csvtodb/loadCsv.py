@@ -32,6 +32,9 @@ def fileload(filename):
     except Error as e:
         logging.error('Program: '+name+',   Error while connecting to the database: ' + str(e))
         return False
+    except csv.Error as e:
+        logging.error('Program: ' + name + ', file: {}, {}'.format(filename, e))
+        return False
 
 
 

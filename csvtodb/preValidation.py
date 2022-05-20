@@ -3,7 +3,6 @@ import Config
 import shutil
 from Config import fileConfig
 import logging
-import exception
 
 name = __name__
 
@@ -43,5 +42,9 @@ def validation(filename):
         # logging.disable(level=logging.INFO)
         return True
     except csv.Error as e:
-        logging.error('Program: ' + name + ',   file: {}, {}'.format(filename, e))
+        logging.error('Program: ' + name + ', file: {}, {}'.format(filename, e))
         return False
+    except Exception as e:
+        logging.error('Program: ' + name + ', file: {}, {}'.format(filename, e))
+        return False
+
