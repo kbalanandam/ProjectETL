@@ -2,7 +2,6 @@ import preValidation
 import loadCsv
 from datetime import datetime
 import logging
-import csv
 import os
 import Config
 from Config import fileConfig
