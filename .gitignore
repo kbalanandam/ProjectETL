@@ -3,4 +3,5 @@ csvtodb/test.py
 csvtodb/Jsontest.py
 csvtodb/*.log
 jsontodb/test.py
+rest/test.py
 
