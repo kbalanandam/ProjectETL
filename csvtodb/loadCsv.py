@@ -11,10 +11,7 @@ def fileload(filename):
     logging.info('Processing file -> ' + filename)
     try:
 
-        connection = mysql.connector.connect(host=dbConfig['host'],
-                                             database=dbConfig['database'],
-                                             user=dbConfig['user'],
-                                             password=dbConfig['password'])
+        connection = mysql.connector.connect(**dbConfig)
 
         if connection.is_connected():
             dbinfo = connection.get_server_info()
