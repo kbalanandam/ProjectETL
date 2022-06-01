@@ -1,0 +1,29 @@
+[
+    {
+        "student_id": "BCE001",
+        "department": "Civil",
+        "name": "Anisha Dahal",
+        "email": "anisha@email.com"
+    },
+
+    {
+        "student_id": "BEL002",
+        "department": "Electrical",
+        "name": "Manisha Adhikari",
+        "email": "manisha@email.com"
+    },
+
+    {
+        "student_id": "BEX003",
+        "department": "Electronics",
+        "name": "Sreeja Poudel",
+        "email": "sreeja@email.com"
+    },
+
+    {
+        "student_id": "BCT004",
+        "department": "Computer",
+        "name": "Srishaa Sundas",
+        "email": "srishaa@email.com"
+    }
+]
