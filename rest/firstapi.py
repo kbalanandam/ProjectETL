@@ -27,7 +27,7 @@ def create_db_table():
         ''')
 
         conn.commit()
-        print("User table created successfully")
+        # print("User table created successfully")
     except:
         print("User table creation failed - Maybe table")
     finally:
@@ -64,6 +64,7 @@ def get_users():
         # convert row objects to dictionary
         for i in rows:
             user = {}
+
             user["user_id"] = i["user_id"]
             user["name"] = i["name"]
             user["email"] = i["email"]
@@ -176,16 +177,19 @@ users.append(user3)
 
 create_db_table()
 
+
 for i in users:
-    print(insert_user(i))
+    insert_user(i)
 
 app = Flask(__name__)
-#CORS(app, resources={r"/*": {"origins": "*"}})
+
+
+# CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 @app.route('/api/users', methods=['GET'])
 def api_get_users():
-    return jsonify(get_users())
+    return jsonify({'users': get_users()})
 
 
 @app.route('/api/users/<user_id>', methods=['GET'])
