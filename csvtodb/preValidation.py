@@ -1,6 +1,4 @@
 import csv
-import Config
-import shutil
 from Config import fileConfig
 import logging
 

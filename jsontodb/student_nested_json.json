@@ -1,0 +1,41 @@
+[
+    {
+        "student_id": "BCE001",
+        "department": "Civil",
+        "name": {
+            "first": "Anisha",
+            "last": "Dahal"
+        },
+        "email": "anisha@email.com"
+    },
+
+    {
+        "student_id": "BCE002",
+        "department": "Electrical",
+        "name": {
+            "first": "Manisha",
+            "last": "Adhikari"
+        },
+        "email": "manisha@email.com"
+    },
+
+    {
+        "student_id": "BCE003",
+        "department": "Electronics",
+        "name": {
+            "first": "Sreeja",
+            "last": "Poudel"
+        },
+        "email": "sreeja@email.com"
+    },
+
+    {
+        "student_id": "BCE004",
+        "department": "Computer",
+        "name": {
+            "first": "Srishaa",
+            "last": "Sundas"
+        },
+        "email": "srishaa@email.com"
+    }
+]
