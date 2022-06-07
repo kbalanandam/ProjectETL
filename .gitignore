@@ -5,3 +5,4 @@ csvtodb/*.log
 jsontodb/test.py
 rest/database.db
 rest/test.py
+rest/InheritanceTest.py
