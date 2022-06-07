@@ -1,0 +1,105 @@
+{
+	"books": [{
+		"name": "Bel and the Dragon ",
+		"author": "Herbert"
+	}, {
+		"name": "The Fairy Castle ",
+		"author": "Olive"
+	}, {
+		"name": "Anemones of the British Coast ",
+		"author": "Francis"
+	}, {
+		"name": "Ask to Embla poem-cycle ",
+		"author": "Randolph"
+	}, {
+		"name": "The City of Is ",
+		"author": "Christabel"
+	}, {
+		"name": "Debatable Land Between This World and the Next ",
+		"author": "Robert"
+	}, {
+		"name": "No Place Like home ",
+		"author": "Leonora"
+	}, {
+		"name": "The Shadowy Portal ",
+		"author": "Mrs."
+	}, {
+		"name": "In A Future Chalet School Girl: Mystery at Heron Lake ",
+		"author": "Josephine"
+	}, {
+		"name": "In The Chalet School and the Island: The Sea Parrot ",
+		"author": "Kester"
+	}, {
+		"name": "In Three Go to the Chalet School: Lavender Laughs in Kashmir ",
+		"author": "Sylvia"
+	}, {
+		"name": "In Maids of La Rochelle: Guernsey Folk Tales ",
+		"author": "Elizabeth"
+	}, {
+		"name": "Bacon Death ",
+		"author": "Marsha"
+	}, {
+		"name": "Breakfast First ",
+		"author": "Samuel"
+	}, {
+		"name": "The Culinary Dostoevski ",
+		"author": "James"
+	}, {
+		"name": "The Egg Laid Twice ",
+		"author": "Beatrice"
+	}, {
+		"name": "He Kissed All Night ",
+		"author": "Susan"
+	}, {
+		"name": "A History of Nebraska ",
+		"author": "Clinton"
+	}, {
+		"name": "Hombre ",
+		"author": "Canton"
+	}, {
+		"name": "It's the Queen of Darkness Pal ",
+		"author": "Rod"
+	}, {
+		"name": "Jack The Story of a Cat ",
+		"author": "Hilda"
+	}, {
+		"name": "Leather Clothes and the History of Man ",
+		"author": "S."
+	}, {
+		"name": "Love Always Beautiful ",
+		"author": "Charles"
+	}, {
+		"name": "Moose ",
+		"author": "Richard"
+	}, {
+		"name": "My Dog ",
+		"author": "Bill"
+	}, {
+		"name": "My Trike ",
+		"author": "Chuck"
+	}, {
+		"name": "The Need for Legalized Abortion ",
+		"author": "Doctor"
+	}, {
+		"name": "The Other Side of My Hand ",
+		"author": "Harlow"
+	}, {
+		"name": "Pancake Pretty ",
+		"author": "Barbara"
+	}, {
+		"name": "Printer's Ink ",
+		"author": "Fred"
+	}, {
+		"name": "The Quick Forest ",
+		"author": "Thomas"
+	}, {
+		"name": "Sam Sam Sam ",
+		"author": "Patricia"
+	}, {
+		"name": "The Stereo and God ",
+		"author": "Reverend"
+	}, {
+		"name": "Vietnam Victory ",
+		"author": "Edward"
+	}]
+}
