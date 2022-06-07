@@ -1,5 +1,5 @@
 from FlaskSqlalchemy_app import db, User, Post, Category, app
-from flask import Flask, request, jsonify, json
+from flask import request, jsonify
 
 
 @app.route('/api/users', methods=['GET'])
