@@ -1,5 +1,4 @@
 from FlaskSqlalchemy_app import db, User, Post, Category
-
 db.drop_all()
 db.create_all()
 
@@ -17,7 +16,12 @@ py.posts.append(p)
 db.session.add(py)
 db.session.commit()
 
-user=User.query.all()
-for i in user:
-    print (i.username,i.email)
+
+
+
+
+
+
+
+
 
