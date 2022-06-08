@@ -6,11 +6,8 @@ from flask import request, jsonify
 def api_get_users():
     all_users = []
     users = User.query.all()
-    user = {}
     for i in users:
-        user['name'] = i.username
-        user['email'] = i.email
-        user['id'] = i.id
+        user = {'name': i.username, 'email': i.email, 'id': i.id}
         all_users.append(user)
 
     return jsonify({'users': all_users})
