@@ -16,7 +16,7 @@ def api_get_users():
 @app.route('/api/users/add', methods=['POST'])
 def api_add_users():
     user = request.get_json()
-    adduser = User(username=user['name'], email=user['mail'])
+    adduser = User(username=user['name'], email=user['email'])
     db.session.add(adduser)
     db.session.commit()
 
