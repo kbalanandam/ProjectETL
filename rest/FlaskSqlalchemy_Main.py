@@ -1,4 +1,5 @@
 from FlaskSqlalchemy_app import db, User, Post, Category
+from flask import jsonify
 db.drop_all()
 db.create_all()
 
@@ -16,6 +17,8 @@ py.posts.append(p)
 db.session.add(py)
 db.session.commit()
 
+all_users = []
+users = User.query.all()
 
 
 
