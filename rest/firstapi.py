@@ -63,14 +63,9 @@ def get_users():
 
         # convert row objects to dictionary
         for i in rows:
-            user = {}
+            user = {"user_id": i["user_id"], "name": i["name"], "email": i["email"], "phone": i["phone"],
+                    "address": i["address"], "country": i["country"]}
 
-            user["user_id"] = i["user_id"]
-            user["name"] = i["name"]
-            user["email"] = i["email"]
-            user["phone"] = i["phone"]
-            user["address"] = i["address"]
-            user["country"] = i["country"]
             users.append(user)
 
     except:
