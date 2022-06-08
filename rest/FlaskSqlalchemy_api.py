@@ -1,5 +1,8 @@
 from FlaskSqlalchemy_app import db, User, Post, Category, app
-from flask import request, jsonify
+from flask import request, jsonify, make_response
+import jwt
+from werkzeug.security import generate_password_hash, check_password_hash
+from functools import wraps
 
 
 @app.route('/api/users', methods=['GET'])
