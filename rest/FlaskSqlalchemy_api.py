@@ -5,6 +5,14 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 
 
+class UnknownException(Exception):
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return self.value
+
+
 @app.route('/api/users', methods=['GET'])
 def api_get_users():
     try:
@@ -36,20 +44,20 @@ def api_add_users():
 def api_add_posts():
     try:
         post = request.get_json()
+        if db.session.query(User).with_entities(User.id).filter(User.username == post['user']).count() == 0:
+            raise UnknownException('unknown user.')
+        elif db.session.query(Category).with_entities(Category.id).filter(
+                Category.name == post['category']).count() == 0:
+            raise UnknownException('unknown Category.')
+
         userid = db.session.query(User).with_entities(User.id).filter(User.username == post['user']).one()
         category_id = db.session.query(Category).with_entities(Category.id).filter(
             Category.name == post['category']).one()
-        message = None
-        if userid is None:
-            message = 'unknown user.'
-        elif category_id is None:
-            message = 'unknown Category.'
 
-        if message is None:
-            add_post = Post(title=post['title'], body=post['body'], category_id=category_id[0], user_id=userid[0])
-            db.session.add(add_post)
-            db.session.commit()
-            message = 'post created.'
+        add_post = Post(title=post['title'], body=post['body'], category_id=category_id[0], user_id=userid[0])
+        db.session.add(add_post)
+        db.session.commit()
+        message = 'post created.'
 
         return jsonify(message)
     except Exception as e:
