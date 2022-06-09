@@ -39,11 +39,17 @@ def api_add_posts():
         userid = db.session.query(User).with_entities(User.id).filter(User.username == post['user']).one()
         category_id = db.session.query(Category).with_entities(Category.id).filter(
             Category.name == post['category']).one()
+        message = None
+        if userid is None:
+            message = 'unknown user.'
+        elif category_id is None:
+            message = 'unknown Category.'
 
-        add_post = Post(title=post['title'], body=post['body'], category_id=category_id[0], user_id=userid[0])
-        db.session.add(add_post)
-        db.session.commit()
-        message = 'post created.'
+        if message is None:
+            add_post = Post(title=post['title'], body=post['body'], category_id=category_id[0], user_id=userid[0])
+            db.session.add(add_post)
+            db.session.commit()
+            message = 'post created.'
 
         return jsonify(message)
     except Exception as e:
