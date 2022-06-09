@@ -33,7 +33,7 @@ db.session.commit()
 all_users = []
 users = User.query.all()
 
-Json_text = {
+Json_result = {
     "user": "Bala",
     "Category": [{
         "category": "Python",
