@@ -29,7 +29,7 @@ class Post(db.Model):
     category_id = db.Column(db.Integer,
                             nullable=False)
     user_id = db.Column(db.Integer,
-                        nullable=True)
+                        nullable=False)
 
     def __repr__(self):
         return '<Post %r>' % self.title

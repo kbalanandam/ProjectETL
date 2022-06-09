@@ -8,10 +8,10 @@ from functools import wraps
 class UnknownException(Exception):
 
     def __init__(self, value):
-        self.value = value
+        self.__value = value
 
     def __str__(self):
-        return self.value
+        return self.__value
 
 
 @app.route('/api/users', methods=['GET'])
