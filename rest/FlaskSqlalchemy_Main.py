@@ -1,20 +1,34 @@
 from FlaskSqlalchemy_app import db, User, Post, Category
-from flask import jsonify
+
 db.drop_all()
 db.create_all()
 
 admin = User(username='admin', email='admin@example.com')
 guest = User(username='guest', email='guest@example.com')
+Bala = User(username='Bala', email='bala@example.com')
 
 db.session.add(admin)
 db.session.add(guest)
+db.session.add(Bala)
 db.session.commit()
 
 py = Category(name='Python')
-Post(title='Hello Python!', body='Python is pretty cool', category=py)
-p = Post(title='Snakes', body='Ssssssss')
-py.posts.append(p)
+#p = Post(title='Snakes', body='Ssssssss')
+#py.posts.append(p)
 db.session.add(py)
+db.session.commit()
+
+
+
+#Post(title='Oracle!', body='Oracle is the best RDBMS', category=py, user=Bala)
+
+
+userid = db.session.query(User).with_entities(User.id).filter(User.username == 'Bala').one()
+print(userid[0])
+categoryid = db.session.query(Category).with_entities(Category.id).filter(Category.name == 'Python').one()
+print(categoryid[0])
+add_post = Post(title='Hello Python, how are you ?',  body='python is the best', category_id=categoryid[0], user_id=userid[0])
+db.session.add(add_post)
 db.session.commit()
 
 all_users = []

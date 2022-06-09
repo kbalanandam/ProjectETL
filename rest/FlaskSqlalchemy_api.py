@@ -32,8 +32,23 @@ def api_add_users():
         return jsonify({'error': str(e)})
 
 
+@app.route('/api/posts/add', methods=['POST'])
+def api_add_posts():
+    try:
+        post = request.get_json()
+        userid = db.session.query(User).with_entities(User.id).filter(User.username == post['user']).one()
+        category_id = db.session.query(Category).with_entities(Category.id).filter(
+            Category.name == post['category']).one()
+
+        add_post = Post(title=post['title'], body=post['body'], category_id=category_id[0], user_id=userid[0])
+        db.session.add(add_post)
+        db.session.commit()
+        message = 'post created.'
+
+        return jsonify(message)
+    except Exception as e:
+        return jsonify({'error': str(e)})
+
+
 if __name__ == '__main__':
     app.run()
-
-
-

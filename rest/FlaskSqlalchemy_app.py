@@ -2,7 +2,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your secret key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///FlaskSqlalchemy_app.db'
@@ -27,10 +26,10 @@ class Post(db.Model):
     pub_date = db.Column(db.DateTime, nullable=False,
                          default=datetime.utcnow)
 
-    category_id = db.Column(db.Integer, db.ForeignKey('category.id'),
+    category_id = db.Column(db.Integer,
                             nullable=False)
-    category = db.relationship('Category',
-                               backref=db.backref('posts', lazy=True))
+    user_id = db.Column(db.Integer,
+                        nullable=True)
 
     def __repr__(self):
         return '<Post %r>' % self.title
