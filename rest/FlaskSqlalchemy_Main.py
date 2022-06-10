@@ -1,5 +1,5 @@
 from FlaskSqlalchemy_app import db, User, Post, Category
-
+import json
 db.drop_all()
 db.create_all()
 
@@ -13,32 +13,61 @@ db.session.add(Bala)
 db.session.commit()
 
 py = Category(name='Python')
-#p = Post(title='Snakes', body='Ssssssss')
-#py.posts.append(p)
+p = Post(title='Hi Python!', body='Python is good', category_id=1, user_id=1)
+# py.posts.append(p)
 db.session.add(py)
+db.session.add(p)
 db.session.commit()
 
-
-
-#Post(title='Oracle!', body='Oracle is the best RDBMS', category=py, user=Bala)
-
-
-userid = db.session.query(User).with_entities(User.id).filter(User.username == 'Bala').one()
-print(userid[0])
-categoryid = db.session.query(Category).with_entities(Category.id).filter(Category.name == 'Python').one()
-print(categoryid[0])
-add_post = Post(title='Hello Python, how are you ?',  body='python is the best', category_id=categoryid[0], user_id=userid[0])
-db.session.add(add_post)
+py = Category(name='Oracle')
+p = Post(title='Hi Oracle!', body='Oracle is good', category_id=2, user_id=1)
+# py.posts.append(p)
+db.session.add(py)
+db.session.add(p)
 db.session.commit()
 
 all_users = []
 users = User.query.all()
 
+Json_result = {
+    "user": "Bala",
+    "Category": [{
+        "name": "Python",
+        "posts": [{
+            "title": "api",
+            "body": "rest apis are good."
+        }, {
+            "title": "Python",
+            "body": "Python apis are good."
+        }]
+    }, {
+        "category": "RDBMS",
+        "posts": [{
+            "title": "Oracle",
+            "body": "Oracle is good."
+        }, {
+            "title": "MySQL",
+            "body": "MySQL is good."
+        }]
+    }]
 
+}
 
-
-
-
-
-
+json_result =[]
+for u in db.session.query(User).all():
+    user = {"user": u.username}
+    posts = []
+    category = []
+    for p in db.session.query(Post).filter(Post.user_id == u.id).all():
+        post = {"title": p.title, "body": p.body}
+        for c in db.session.query(Category).filter(Category.id == p.category_id).all():
+            cs = {"name":c.name}
+            category.append(cs)
+            print("User: {}, Category: {}, title: {}, Post: {} ".format(u.username, c.name, p.title, p.body))
+            json_result.append(category)
+        print("User: {}, Category: {}".format(u.username, c.name))
+        json_result.append(posts)
+    print("User: {}".format(u.username))
+    json_result.append(user)
+print(json.dumps(json_result))
 
