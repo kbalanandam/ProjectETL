@@ -60,19 +60,32 @@ Json_result = {
 
 }
 
-json_result = []
-category = []
 posts = []
-cs=[]
+category = []
+json_result = []
+name = 'admin'
+post = {}
+cs = {}
+user = db.session.query(User).filter(User.username == name).one()
+for a in db.session.query(Post).filter(Post.user_id == user.id).all():
+    for c in db.session.query(Category).filter(Category.id == a.category_id).all():
 
-user = db.session.query(User).filter(User.username == 'guest').one()
-for p in db.session.query(Post).filter(Post.user_id == user.id).all():
-    post = {"title": p.title, "body": p.body}
-    posts.append(post)
-    for c in db.session.query(Category).filter(Category.id == p.category_id).all():
-        cs = {"name": c.name, "posts": posts}
+        for r in db.session.query(Post).filter(Post.category_id == c.id, Post.user_id == user.id).all():
+            print(user.id)
+            print(c.id)
+            print(r.id)
+            post['title']=r.title
+            post['body']= r.body
+            posts.append(post)
+            print(posts)
+
+        cs['name'] = c.name
+        cs['posts']= posts
         category.append(cs)
-json_result.append({"user": user.username, "category": category})
+        print(cs)
+    json_result.append({"user": user.username, "category": category})
+#print(json_result)
+
 
 
 print(json.dumps(json_result,indent=4))
