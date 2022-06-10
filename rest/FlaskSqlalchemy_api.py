@@ -1,8 +1,9 @@
 from FlaskSqlalchemy_app import db, User, Post, Category, app
 from flask import request, jsonify, make_response
-import jwt
-from werkzeug.security import generate_password_hash, check_password_hash
-from functools import wraps
+import json
+# import jwt
+# from werkzeug.security import generate_password_hash, check_password_hash
+# from functools import wraps
 
 
 class UnknownException(Exception):
@@ -61,6 +62,29 @@ def api_add_posts():
         message = 'post created.'
 
         return jsonify(message)
+    except Exception as e:
+        return jsonify({'error': str(e)})
+
+
+@app.route('/api/posts/<username>', methods=['GET'])
+def api_get_posts(username):
+    try:
+        posts = []
+        category = []
+        json_result = []
+        name = username
+        if db.session.query(User).filter(User.username == name).count() == 0:
+            raise UnknownException('unknown user.')
+        user = db.session.query(User).filter(User.username == name).one()
+        for p in db.session.query(Post).filter(Post.user_id == user.id).all():
+            post = {"title": p.title, "body": p.body}
+            posts.append(post)
+            for c in db.session.query(Category).filter(Category.id == p.category_id).all():
+                cs = {"name": c.name, "posts": posts}
+                category.append(cs)
+        json_result.append({"user": user.username, "category": category})
+        return json.dumps(json_result)
+
     except Exception as e:
         return jsonify({'error': str(e)})
 

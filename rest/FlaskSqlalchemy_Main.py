@@ -1,5 +1,6 @@
 from FlaskSqlalchemy_app import db, User, Post, Category
 import json
+
 db.drop_all()
 db.create_all()
 
@@ -26,6 +27,12 @@ db.session.add(py)
 db.session.add(p)
 db.session.commit()
 
+
+p = Post(title='Hi Oracle!', body='Oracle is good', category_id=2, user_id=2)
+# py.posts.append(p)
+db.session.add(p)
+db.session.commit()
+
 all_users = []
 users = User.query.all()
 
@@ -41,7 +48,7 @@ Json_result = {
             "body": "Python apis are good."
         }]
     }, {
-        "category": "RDBMS",
+        "name": "RDBMS",
         "posts": [{
             "title": "Oracle",
             "body": "Oracle is good."
@@ -53,21 +60,19 @@ Json_result = {
 
 }
 
-json_result =[]
-for u in db.session.query(User).all():
-    user = {"user": u.username}
-    posts = []
-    category = []
-    for p in db.session.query(Post).filter(Post.user_id == u.id).all():
-        post = {"title": p.title, "body": p.body}
-        for c in db.session.query(Category).filter(Category.id == p.category_id).all():
-            cs = {"name":c.name}
-            category.append(cs)
-            print("User: {}, Category: {}, title: {}, Post: {} ".format(u.username, c.name, p.title, p.body))
-            json_result.append(category)
-        print("User: {}, Category: {}".format(u.username, c.name))
-        json_result.append(posts)
-    print("User: {}".format(u.username))
-    json_result.append(user)
-print(json.dumps(json_result))
+json_result = []
+category = []
+posts = []
+cs=[]
 
+user = db.session.query(User).filter(User.username == 'guest').one()
+for p in db.session.query(Post).filter(Post.user_id == user.id).all():
+    post = {"title": p.title, "body": p.body}
+    posts.append(post)
+    for c in db.session.query(Category).filter(Category.id == p.category_id).all():
+        cs = {"name": c.name, "posts": posts}
+        category.append(cs)
+json_result.append({"user": user.username, "category": category})
+
+
+print(json.dumps(json_result,indent=4))
