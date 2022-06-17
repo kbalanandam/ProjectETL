@@ -15,6 +15,31 @@ class UnknownException(Exception):
         return self.__value
 
 
+class Posts:
+    def __int__(self, uid, cid):
+        self.post = []
+
+    @staticmethod
+    def get_post(uid, cid):
+        post = []
+        for p in db.session.query(Post).filter(Post.user_id == uid, Post.category_id == cid).all():
+            post.append({"title": p.title, "body": p.body})
+        return post
+
+
+class Users:
+    def __init__(self, user) -> object:
+        self.user = user
+        self.category = []
+        user = db.session.query(User).filter(User.username == self.user).one()
+
+        for value in db.session.query(Post).with_entities(Post.category_id).filter(Post.user_id == user.id).all():
+            category_id: object = value.category_id
+            c = db.session.query(Category).with_entities(Category.name).filter(Category.id == category_id).one()
+
+            self.category.append({"name": c.name, "posts": Posts.get_post(user.id, category_id)})
+
+
 @app.route('/api/users', methods=['GET'])
 def api_get_users():
     try:
@@ -69,21 +94,13 @@ def api_add_posts():
 @app.route('/api/posts/<username>', methods=['GET'])
 def api_get_posts(username):
     try:
-        posts = []
-        category = []
-        json_result = []
+
         name = username
         if db.session.query(User).filter(User.username == name).count() == 0:
             raise UnknownException('unknown user.')
         user = db.session.query(User).filter(User.username == name).one()
-        for p in db.session.query(Post).filter(Post.user_id == user.id).all():
-            post = {"title": p.title, "body": p.body}
-            posts.append(post)
-            for c in db.session.query(Category).filter(Category.id == p.category_id).all():
-                cs = {"name": c.name, "posts": posts}
-                category.append(cs)
-        json_result.append({"user": user.username, "category": category})
-        return json.dumps(json_result)
+        user1 = Users(user.username)
+        return json.dumps(user1.__dict__, indent=4)
 
     except Exception as e:
         return jsonify({'error': str(e)})
