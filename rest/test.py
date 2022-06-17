@@ -1,5 +1,6 @@
 # curl -v http://127.0.0.1:5000/api/users
 # curl -d "{\"email\":\"sampath@gmail.com\",\"name\":\"Sampath\"}" -H "Content-Type: application/json" http://127.0.0.1:5000/api/users/add
+# curl -d "{\"title\":\"test oracle post\",\"user\":\"Bala\",\"category\":\"Oracle\",\"body\":\"Oracle learning is always fun!\"}" -H "Content-Type: application/json" http://127.0.0.1:5000/api/posts/add
 
 from FlaskSqlalchemy_app import db, User, Post, Category, app
 from flask import request, jsonify, make_response
@@ -24,7 +25,7 @@ class Users:
         self.category = []
         user = db.session.query(User).filter(User.username == self.user).one()
 
-        for value in db.session.query(Post).with_entities(Post.category_id).filter(Post.user_id == user.id).all():
+        for value in db.session.query(Post).with_entities(Post.category_id).filter(Post.user_id == user.id).distinct():
             category_id: object = value.category_id
             c = db.session.query(Category).with_entities(Category.name).filter(Category.id == category_id).one()
 

@@ -16,7 +16,7 @@ class UnknownException(Exception):
 
 
 class Posts:
-    def __int__(self, uid, cid):
+    def __int__(self):
         self.post = []
 
     @staticmethod
@@ -28,12 +28,12 @@ class Posts:
 
 
 class Users:
-    def __init__(self, user) -> object:
+    def __init__(self, user):
         self.user = user
         self.category = []
         user = db.session.query(User).filter(User.username == self.user).one()
 
-        for value in db.session.query(Post).with_entities(Post.category_id).filter(Post.user_id == user.id).all():
+        for value in db.session.query(Post).with_entities(Post.category_id).filter(Post.user_id == user.id).distinct():
             category_id: object = value.category_id
             c = db.session.query(Category).with_entities(Category.name).filter(Category.id == category_id).one()
 
@@ -81,7 +81,7 @@ def api_add_posts():
         category_id = db.session.query(Category).with_entities(Category.id).filter(
             Category.name == post['category']).one()
 
-        add_post = Post(title=post['title'], body=post['body'], category_id=category_id[0], user_id=userid[0])
+        add_post = Post(title=post['title'], body=post['body'], category_id=category_id.id, user_id=userid.id)
         db.session.add(add_post)
         db.session.commit()
         message = 'post created.'
