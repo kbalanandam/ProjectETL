@@ -34,3 +34,7 @@ class Users:
 
 user1 = Users('admin')
 print(json.dumps(user1.__dict__, indent=4))
+
+
+userid = db.session.query(User).with_entities(User.id).filter(User.username == 'Bala').one()
+print(userid)

@@ -72,15 +72,15 @@ def api_add_posts():
     try:
         post = request.get_json()
 
-        userid = db.session.query(User).with_entities(User.id).filter(User.username == post['user']).one()
-        if userid.id is None:
+        if db.session.query(User).with_entities(User.id).filter(User.username == post['user']).count() == 0:
             raise UnknownException('unknown user.')
-
-        category_id = db.session.query(Category).with_entities(Category.id).filter(Category.name == post['category']).\
-            one()
-        if category_id.id is None:
+        elif db.session.query(Category).with_entities(Category.id).filter(
+                Category.name == post['category']).count() == 0:
             raise UnknownException('unknown Category.')
 
+        userid = db.session.query(User).with_entities(User.id).filter(User.username == post['user']).one()
+        category_id = db.session.query(Category).with_entities(Category.id).filter(
+            Category.name == post['category']).one()
         add_post = Post(title=post['title'], body=post['body'], category_id=category_id.id, user_id=userid.id)
         db.session.add(add_post)
         db.session.commit()
