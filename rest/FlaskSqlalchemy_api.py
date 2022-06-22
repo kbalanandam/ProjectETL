@@ -95,11 +95,9 @@ def api_add_posts():
 def api_get_posts(username):
     try:
 
-        name = username
-        if db.session.query(User).filter(User.username == name).count() == 0:
+        if db.session.query(User).filter(User.username == username).count() == 0:
             raise UnknownException('unknown user.')
-        user = db.session.query(User).filter(User.username == name).one()
-        user1 = Users(user.username)
+        user1 = Users(username)
         return json.dumps(user1.__dict__, indent=4)
 
     except Exception as e:
