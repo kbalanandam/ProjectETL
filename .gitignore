@@ -4,5 +4,6 @@ csvtodb/Jsontest.py
 csvtodb/*.log
 jsontodb/test.py
 rest/database.db
-rest/test.py
+#rest/test.py
 rest/InheritanceTest.py
+rest/FlaskSqlalchemy_app.db
