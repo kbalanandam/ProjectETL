@@ -26,6 +26,28 @@ class Posts:
             posts.append({"title": p.title, "body": p.body})
         return posts
 
+    @staticmethod
+    def add_posts(**post):
+        try:
+
+            if db.session.query(User).with_entities(User.id).filter(User.username == post['user']).count() == 0:
+                raise UnknownException('unknown user.')
+            elif db.session.query(Category).with_entities(Category.id).filter(
+                    Category.name == post['category']).count() == 0:
+                raise UnknownException('unknown Category.')
+
+            userid = db.session.query(User).with_entities(User.id).filter(User.username == post['user']).one()
+            category_id = db.session.query(Category).with_entities(Category.id).filter(
+                Category.name == post['category']).one()
+            add_post = Post(title=post['title'], body=post['body'], category_id=category_id.id, user_id=userid.id)
+            db.session.add(add_post)
+            db.session.commit()
+            message = 'post created.'
+
+            return jsonify(message)
+        except Exception as e:
+            return jsonify({'error': str(e)})
+
 
 class Categories:
 
@@ -46,6 +68,17 @@ class Categories:
 
 
 class Users:
+
+    @staticmethod
+    def add_users(**user):
+        try:
+            adduser = User(username=user['name'], email=user['email'])
+            db.session.add(adduser)
+            db.session.commit()
+
+            return jsonify('user added.')
+        except Exception as e:
+            return jsonify({'error': str(e)})
 
     @staticmethod
     def get_users():
@@ -88,11 +121,7 @@ def api_get_users():
 def api_add_users():
     try:
         user = request.get_json()
-        adduser = User(username=user['name'], email=user['email'])
-        db.session.add(adduser)
-        db.session.commit()
-
-        return jsonify('user added.')
+        return Users.add_users(**user)
     except Exception as e:
         return jsonify({'error': str(e)})
 
@@ -111,22 +140,7 @@ def api_add_category():
 def api_add_posts():
     try:
         post = request.get_json()
-
-        if db.session.query(User).with_entities(User.id).filter(User.username == post['user']).count() == 0:
-            raise UnknownException('unknown user.')
-        elif db.session.query(Category).with_entities(Category.id).filter(
-                Category.name == post['category']).count() == 0:
-            raise UnknownException('unknown Category.')
-
-        userid = db.session.query(User).with_entities(User.id).filter(User.username == post['user']).one()
-        category_id = db.session.query(Category).with_entities(Category.id).filter(
-            Category.name == post['category']).one()
-        add_post = Post(title=post['title'], body=post['body'], category_id=category_id.id, user_id=userid.id)
-        db.session.add(add_post)
-        db.session.commit()
-        message = 'post created.'
-
-        return jsonify(message)
+        return Posts.add_posts(**post)
     except Exception as e:
         return jsonify({'error': str(e)})
 
