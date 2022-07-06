@@ -1,3 +1,4 @@
+# only run this one time, when to set up some test data initially.
 from model import db, User, Post, Category
 import json
 
