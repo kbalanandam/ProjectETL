@@ -18,8 +18,6 @@ class UnknownException(Exception):
 
 
 class Posts:
-    def __int__(self):
-        self.post = []
 
     @staticmethod
     def get_posts(uid, cid):
@@ -30,6 +28,16 @@ class Posts:
 
 
 class Categories:
+
+    @staticmethod
+    def add_category(cname):
+        try:
+            category = Category(name=cname)
+            db.session.add(category)
+            db.session.commit()
+            return jsonify('category added.')
+        except Exception as e:
+            return jsonify({'error': str(e)})
 
     @staticmethod
     def get_category(cid):
@@ -85,6 +93,16 @@ def api_add_users():
         db.session.commit()
 
         return jsonify('user added.')
+    except Exception as e:
+        return jsonify({'error': str(e)})
+
+
+@app.route('/api/category/add', methods=['POST'])
+def api_add_category():
+    try:
+        category = request.get_json()
+        if category['name']:
+            return Categories.add_category(category['name'])
     except Exception as e:
         return jsonify({'error': str(e)})
 
