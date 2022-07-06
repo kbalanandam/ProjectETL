@@ -6,5 +6,5 @@ jsontodb/test.py
 rest/database.db
 rest/test.py
 rest/InheritanceTest.py
-rest/FlaskSqlalchemy_app.db
+rest/app.db
 HTML/*
