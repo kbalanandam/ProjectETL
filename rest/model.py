@@ -41,3 +41,7 @@ class Category(db.Model):
 
     def __repr__(self):
         return '<Category %r>' % self.name
+
+if __name == '__main__':
+    db.drop_all()
+    db.create_all()
