@@ -1,4 +1,4 @@
-from FlaskSqlalchemy_app import db, User, Post, Category
+from model import db, User, Post, Category
 import json
 
 db.drop_all()

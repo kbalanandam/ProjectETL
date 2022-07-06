@@ -1,4 +1,4 @@
-from FlaskSqlalchemy_app import db, User, Post, Category, app
+from model import db, User, Post, Category, app
 from flask import request, jsonify
 import json
 
