@@ -8,3 +8,5 @@ rest/test.py
 rest/InheritanceTest.py
 rest/app.db
 HTML/*
+rest/firstapi.py
+rest/test.py
