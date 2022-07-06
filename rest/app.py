@@ -18,6 +18,8 @@ class UnknownException(Exception):
 
 
 class Posts:
+    def __int__(self):
+        pass
 
     @staticmethod
     def get_posts(uid, cid):
@@ -50,6 +52,8 @@ class Posts:
 
 
 class Categories:
+    def __int__(self):
+        pass
 
     @staticmethod
     def add_category(cname):
@@ -68,6 +72,8 @@ class Categories:
 
 
 class Users:
+    def __int__(self):
+        pass
 
     @staticmethod
     def add_users(**user):
