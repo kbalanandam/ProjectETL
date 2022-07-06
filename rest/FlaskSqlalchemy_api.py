@@ -1,6 +1,8 @@
 from FlaskSqlalchemy_app import db, User, Post, Category, app
-from flask import request, jsonify, make_response
+from flask import request, jsonify
 import json
+
+
 # import jwt
 # from werkzeug.security import generate_password_hash, check_password_hash
 # from functools import wraps
@@ -20,38 +22,58 @@ class Posts:
         self.post = []
 
     @staticmethod
-    def get_post(uid, cid):
-        post = []
+    def get_posts(uid, cid):
+        posts = []
         for p in db.session.query(Post).filter(Post.user_id == uid, Post.category_id == cid).all():
-            post.append({"title": p.title, "body": p.body})
-        return post
+            posts.append({"title": p.title, "body": p.body})
+        return posts
+
+
+class Categories:
+
+    @staticmethod
+    def get_category(cid):
+        c = db.session.query(Category).filter(Category.id == cid).one()
+        return c.name
 
 
 class Users:
-    def __init__(self, user):
-        self.user = user
-        self.category = []
-        user = db.session.query(User).filter(User.username == self.user).one()
 
-        for value in db.session.query(Post).with_entities(Post.category_id).filter(Post.user_id == user.id).distinct():
-            category_id: object = value.category_id
-            c = db.session.query(Category).with_entities(Category.name).filter(Category.id == category_id).one()
+    @staticmethod
+    def get_users():
+        try:
+            all_users = []
+            users = User.query.all()
+            for i in users:
+                user = {'name': i.username, 'email': i.email, 'id': i.id}
+                all_users.append(user)
 
-            self.category.append({"name": c.name, "posts": Posts.get_post(user.id, category_id)})
+            return jsonify({'users': all_users})
+        except Exception as e:
+            return jsonify({'error': str(e)})
+
+    @staticmethod
+    def get_posts(user):
+        try:
+            user_posts = []
+            user_category = []
+            category = {}
+
+            user = db.session.query(User).filter(User.username == user).one()
+            for c in db.session.query(Post).with_entities(Post.category_id).filter(Post.user_id == user.id).distinct():
+                for a in db.session.query(Category).filter(Category.id == c.category_id):
+                    category['name'] = Categories.get_category(a.id)
+                    category['posts'] = Posts.get_posts(user.id, a.id)
+                user_category.append({"name": category['name'], "posts": category['posts']})
+            user_posts.append({"user": user.username, "category": user_category})
+            return user_posts
+        except Exception as e:
+            return jsonify({'error': str(e)})
 
 
 @app.route('/api/users', methods=['GET'])
 def api_get_users():
-    try:
-        all_users = []
-        users = User.query.all()
-        for i in users:
-            user = {'name': i.username, 'email': i.email, 'id': i.id}
-            all_users.append(user)
-
-        return jsonify({'users': all_users})
-    except Exception as e:
-        return jsonify({'error': str(e)})
+    return Users.get_users()
 
 
 @app.route('/api/users/add', methods=['POST'])
@@ -97,8 +119,7 @@ def api_get_posts(username):
 
         if db.session.query(User).filter(User.username == username).count() == 0:
             raise UnknownException('unknown user.')
-        user1 = Users(username)
-        return json.dumps(user1.__dict__, indent=4)
+        return json.dumps(Users.get_posts(username), indent=4)
 
     except Exception as e:
         return jsonify({'error': str(e)})
