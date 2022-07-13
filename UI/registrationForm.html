@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Registration</title>
+    <script type="text/javascript" src="events.js"></script>
+    <style>
+        .personal-info-section {
+            display: inline;
+            width: 500px;
+            font-family: Arial;
+            border-radius: 20px;
+        }
+
+        .personal-info-fields {
+            font-family: 'Times New Roman';
+            font-weight: bold;
+
+        }
+
+        .form-title-block {
+            display: contents;
+            width: 1300px;
+            border-width: initial;
+            border: 1px solid blue;
+            padding: 50px;
+            margin: 20px;
+        }
+
+        .user-registration-title {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .form-submit-button {
+            float: inline-end;
+            border-radius: 5px;
+        }
+
+        label {
+            display: inline-block;
+            width: 150px;
+            text-align: right;
+        }
+        input {
+            text-align: left;
+        }
+        .gender{
+            display: table-row-group;
+        }
+
+        .user-registration-form {
+            text-align: center;
+            font-weight: bold;
+        }
+        .genderOptions{font-family: 'Times New Roman';
+                       font-weight:normal;
+        }
+    </style>
+</head>
+<body>
+    <div id="form-title-block" class="form-title-block">
+        <h2 id="user-registration-title" class="user-registration-title">User Registration</h2>
+        <br />
+    </div>
+    <form id="user-registration-form" class="user-registration-form">
+        <fieldset id="personal-info-section" class="personal-info-section">
+            <!--<legend>Personal Info</legend>-->
+            <div class="personal-info-fields">
+                <label for="fname">First name:</label>
+                <input type="text" id="fname" name="fname"><br><br>
+                <label for="lname">Last name:</label>
+                <input type="text" id="lname" name="lname"><br><br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email"><br><br>
+                <label for="user">User name:</label>
+                <input type="text" id="user" name="user"><br><br>
+                <label for="birthday">Birthday:</label>
+                <input type="date" id="birthday" name="birthday"><br><br>
+                <!--<label for="gender" id="gender" class="gender">-->
+                <!--Gender:-->
+                                                                     <div class="genderOptions">
+                                                                        <label for="gender" class="personal-info-fields">Gender</label>:
+                                                                         <input type="radio" id="gender_m" name="genderSelection" value="Male">Male
+                                                                         <input type="radio" id="gender_f" name="genderSelection" value="Female">Female
+                                                                         <input type="radio" id="gender_o" name="genderSelection" value="Female">Other
+                                                                     </div>
+                <!-- </label>-->
+                <br><br>
+
+                <button type="button" class="form-submit-button" onclick="validateRegistrationForm()">Submit</button>
+            </div>
+        </fieldset>
+    </form>
+</body>
+</html>

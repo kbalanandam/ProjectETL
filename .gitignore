@@ -10,3 +10,5 @@ rest/app.db
 HTML/*
 rest/firstapi.py
 rest/test.py
+UI/objects.js
+UI/stopwatch.js
