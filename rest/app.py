@@ -1,11 +1,13 @@
 from model import db, User, Post, Category, app
 from flask import request, jsonify
 import json
+from flask_cors import CORS
 
 
 # import jwt
 # from werkzeug.security import generate_password_hash, check_password_hash
 # from functools import wraps
+CORS(app)
 
 
 class UnknownException(Exception):
