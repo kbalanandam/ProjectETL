@@ -1,3 +1,24 @@
+async function submitRegistrationForm() {
+    var user = document.getElementById("user");
+    var email = document.getElementById("email");
+    let xhr = new XMLHttpRequest();
+
+    xhr.open("POST", "http://127.0.0.1:5000/api/users/add");
+
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+
+    let data = JSON.stringify({
+        "name": user.value,
+        "email": email.value
+    });
+    console.log(data);
+
+    xhr.onload = () => console.log(xhr.responseText);
+
+    xhr.send(data);
+}
+
 function validateRegistrationForm() {
     var fname = document.getElementById("fname");
     var lname = document.getElementById("lname");
@@ -14,12 +35,12 @@ function validateRegistrationForm() {
         alert("Please enter user name to register.");
         return;
     }
-    
+    submitRegistrationForm()
 }
 
 function validateLoginForm() {
     var loginname = document.getElementById("loginname");
-    
+
     if (loginname.value == "") {
         alert("Please enter login details.");
         return;
@@ -31,4 +52,5 @@ function validateLoginForm() {
         return;
 
     }
+
 }
