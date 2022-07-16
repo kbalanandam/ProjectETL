@@ -19,6 +19,15 @@ class UnknownException(Exception):
         return self.__value
 
 
+class AlreadyExists(Exception):
+
+    def __init__(self, value):
+        self.__value = value
+
+    def __str__(self):
+        return self.__value
+
+
 class Posts:
     def __int__(self):
         pass
@@ -80,13 +89,14 @@ class Users:
     @staticmethod
     def add_users(**user):
         try:
+            if db.session.query(User).filter(User.username == user['name']).count() > 0:
+                raise AlreadyExists("user already exists.")
             adduser = User(username=user['name'], email=user['email'])
             db.session.add(adduser)
             db.session.commit()
-
-            return jsonify('user added.')
+            return jsonify({"message": "user {}, created successfully.".format(user['name'])})
         except Exception as e:
-            return jsonify({'error': str(e)})
+            return jsonify({'message':  str(e)})
 
     @staticmethod
     def get_users():

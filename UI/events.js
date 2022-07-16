@@ -3,7 +3,7 @@ async function submitRegistrationForm() {
     var email = document.getElementById("email");
     let xhr = new XMLHttpRequest();
 
-    xhr.open("POST", "http://127.0.0.1:5000/api/users/add");
+    xhr.open("POST", "http://127.0.0.1:5000/api/users/add", false);
 
     xhr.setRequestHeader("Content-Type", "application/json");
 
@@ -15,8 +15,17 @@ async function submitRegistrationForm() {
     console.log(data);
 
     xhr.onload = () => console.log(xhr.responseText);
-
+    try {
     xhr.send(data);
+        if (xhr.status != 200) {
+            alert(`Error ${xhr.status}: ${xhr.statusText}`);
+        } else {
+            
+            alert(xhr.responseText);
+        }
+    } catch (err) { // instead of onerror
+        alert("Request failed");
+    }
 }
 
 function validateRegistrationForm() {
