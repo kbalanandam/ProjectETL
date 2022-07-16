@@ -20,8 +20,9 @@ async function submitRegistrationForm() {
         if (xhr.status != 200) {
             alert(`Error ${xhr.status}: ${xhr.statusText}`);
         } else {
-            
-            alert(xhr.responseText);
+
+            let response = JSON.parse(xhr.responseText);
+            alert(response.message);
         }
     } catch (err) { // instead of onerror
         alert("Request failed");
