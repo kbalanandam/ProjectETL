@@ -94,7 +94,7 @@ class Users:
             adduser = User(username=user['name'], email=user['email'])
             db.session.add(adduser)
             db.session.commit()
-            return jsonify({"message": "user {}, created successfully.".format(user['name'])})
+            return jsonify({"message": "user {}, is created successfully.".format(user['name'])})
         except Exception as e:
             return jsonify({'message':  str(e)})
 
@@ -128,6 +128,20 @@ class Users:
             return user_posts
         except Exception as e:
             return jsonify({'error': str(e)})
+
+    @staticmethod
+    def del_user(user):
+        try:
+            if db.session.query(User).filter(User.username == user).count() == 0:
+                raise UnknownException("unknown user.")
+
+            userid = db.session.query(User).with_entities(User.id).filter(User.username == user).one()
+            userid = User.query.get(userid)
+            db.session.delete(userid)
+            db.session.commit()
+            return jsonify({"message": "user deleted."})
+        except Exception as e:
+            return jsonify({'message': str(e)})
 
 
 @app.route('/api/users', methods=['GET'])
@@ -171,6 +185,15 @@ def api_get_posts(username):
             raise UnknownException('unknown user.')
         return json.dumps(Users.get_posts(username), indent=4)
 
+    except Exception as e:
+        return jsonify({'error': str(e)})
+
+
+@app.route('/api/delete/user', methods=['POST'])
+def api_del_users():
+    try:
+        user = request.get_json()
+        return Users.del_user(user['name'])
     except Exception as e:
         return jsonify({'error': str(e)})
 
