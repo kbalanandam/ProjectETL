@@ -74,7 +74,7 @@ class Categories:
             db.session.commit()
             return jsonify('category added.')
         except Exception as e:
-            return jsonify({'error': str(e)})
+            return jsonify({'message': 'Error: '+str(e)})
 
     @staticmethod
     def get_category(cid):
