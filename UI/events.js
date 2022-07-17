@@ -1,6 +1,22 @@
 async function submitRegistrationForm() {
-    var user = document.getElementById("user");
+    var fname = document.getElementById("fname");
+    var lname = document.getElementById("lname");
+    var login = document.getElementById("login");
     var email = document.getElementById("email");
+    var ele = document.getElementsByName('gender');
+
+    for (i = 0; i < ele.length; i++) {
+        if (ele[i].checked)
+            var genderSelect = ele[i].value;
+        
+    }
+    
+    if (genderSelect == "Male")
+        var gender = 'M';
+    else if (genderSelect == "Female")
+        var gender = 'F';
+    else var gender = 'O';
+    
     let xhr = new XMLHttpRequest();
 
     xhr.open("POST", "http://127.0.0.1:5000/api/users/add", false);
@@ -9,8 +25,11 @@ async function submitRegistrationForm() {
 
 
     let data = JSON.stringify({
-        "name": user.value,
-        "email": email.value
+        "firstname": fname.value,
+        "lastname": lname.value,
+        "login": login.value,
+        "email": email.value,
+        "gender": gender
     });
     console.log(data);
 
@@ -32,7 +51,7 @@ async function submitRegistrationForm() {
 function validateRegistrationForm() {
     var fname = document.getElementById("fname");
     var lname = document.getElementById("lname");
-    var user = document.getElementById("user");
+    var login = document.getElementById("login");
     if (fname.value == "") {
         alert("Please enter some value for First Name.");
         return;
@@ -41,7 +60,7 @@ function validateRegistrationForm() {
         alert("Please enter some value for Last Name.");
         return;
     }
-    if (user.value == "") {
+    if (login.value == "") {
         alert("Please enter user name to register.");
         return;
     }

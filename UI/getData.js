@@ -28,16 +28,24 @@ function show(data) {
 	let tab =
 		`<tr>
 			<th>UserId</th>
-			<th>Name</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Gender</th>
+			<th>login</th>
 			<th>Email</th>
+			<th>Inactive</th>
 		</tr>`;
 	
 	// Loop to access all rows
 	for (let r of data.users) {
 		tab += `<tr>
 			<td>${r.id} </td>
-			<td>${r.name}</td>
+			<td>${r.firstname} </td>
+			<td>${r.lastname} </td>
+			<td>${r.gender} </td>
+			<td>${r.login}</td>
 			<td>${r.email}</td>
+			<td><input type="checkbox"></td>
 		</tr>`;
 	}
 	// Setting innerHTML as tab variable
