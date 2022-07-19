@@ -19,7 +19,9 @@ async function submitRegistrationForm() {
     
     let xhr = new XMLHttpRequest();
 
-    xhr.open("POST", "http://127.0.0.1:5000/api/users/add", false);
+    let userCreateApi = "http://127.0.0.1:5000/api/users/add";
+
+    xhr.open("POST", userCreateApi, false);
 
     xhr.setRequestHeader("Content-Type", "application/json");
 
