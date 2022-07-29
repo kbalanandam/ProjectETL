@@ -25,7 +25,7 @@ class UsersApi(Resource):
 
             return jsonify({'users': all_users})
         except Exception as e:
-            return jsonify({'message': 'Error: ' + str(e)})
+            return {'messageType': 'Error', 'message': str(e)}, 500
 
     def post(self):
 
@@ -45,7 +45,7 @@ class UsersApi(Resource):
             new.save_to_db()
             return {'messageType': 'Success', "message": "user {}, is created successfully.".format(_user['user'])}
         except Exception as e:
-            return {'messageType': 'Error', 'message': str(e)}
+            return {'messageType': 'Error', 'message': str(e)}, 500
 
 
 class UserApi(Resource):
@@ -68,7 +68,7 @@ class UserApi(Resource):
             return {'messageType': 'Error', 'message': 'user not found'}, 404
 
         except Exception as e:
-            return {'messageType': 'Error', 'message': str(e)}
+            return {'messageType': 'Error', 'message': str(e)}, 500
 
 
 class CategoriesApi(Resource):
@@ -87,7 +87,7 @@ class CategoriesApi(Resource):
             new.save_to_db()
             return {'messageType': 'Success', 'message': "Category {}, is created successfully.".format(_category['name'])}, 201
         except Exception as e:
-            return {'messageType': 'Error', 'message': 'Error: ' + str(e)}
+            return {'messageType': 'Error', 'message': 'Error: ' + str(e)}, 500
 
 
 class CategoryApi(Resource):
@@ -100,7 +100,7 @@ class CategoryApi(Resource):
             return {'messageType': 'Error', 'message': 'category not found'}, 404
 
         except Exception as e:
-            return {'messageType': 'Error', 'message': str(e)}, 201
+            return {'messageType': 'Error', 'message': str(e)}, 500
 
     def delete(self, category):
         try:
@@ -111,7 +111,7 @@ class CategoryApi(Resource):
             return {'messageType': 'Error', 'message': 'category not found'}, 404
 
         except Exception as e:
-            return {'messageType': 'Error', 'message': str(e)}
+            return {'messageType': 'Error', 'message': str(e)}, 500
 
 
 class UserPostApi(Resource):
@@ -138,7 +138,7 @@ class UserPostApi(Resource):
 
             return {'messageType': 'Success', 'message': 'post created.'}, 201
         except Exception as e:
-            return {'messageType': 'Error', 'message': str(e)}
+            return {'messageType': 'Error', 'message': str(e)}, 500
 
 
 class PostbyUserApi(Resource):
@@ -159,7 +159,7 @@ class PostbyUserApi(Resource):
                 user_category.append({"name": category['name'], "posts": category['posts']})
             return {'user': user, 'category': user_category}
         except Exception as e:
-            return jsonify({'messageType': 'Error', 'message': str(e)})
+            return {'messageType': 'Error', 'message': str(e)}, 500
 
 
 api.add_resource(UsersApi, '/api/users', endpoint='users')
