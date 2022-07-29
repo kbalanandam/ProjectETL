@@ -12,24 +12,6 @@ CORS(app)
 api = Api(app)
 
 
-class UnknownException(Exception):
-
-    def __init__(self, value):
-        self.__value = value
-
-    def __str__(self):
-        return self.__value
-
-
-class AlreadyExists(Exception):
-
-    def __init__(self, value):
-        self.__value = value
-
-    def __str__(self):
-        return self.__value
-
-
 class UsersApi(Resource):
 
     def get(self):
