@@ -45,6 +45,7 @@ async function submitRegistrationForm() {
             let response = JSON.parse(xhr.responseText);
             alert(response.message);
         }
+        document.getElementById('fname').style.display = 'none';
     } catch (err) { // instead of onerror
         alert("Request failed");
     }
