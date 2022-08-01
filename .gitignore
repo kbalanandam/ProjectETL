@@ -6,7 +6,7 @@ jsontodb/test.py
 rest/database.db
 rest/test.py
 rest/InheritanceTest.py
-rest/app.db
+rest/*.db
 rest/firstapi.py
 rest/test.py
 UI/objects.js
