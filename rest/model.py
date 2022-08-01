@@ -111,7 +111,7 @@ class Category(db.Model):
         return {'name': self.name, 'description': self.description}
 
     @classmethod
-    def find_by_name(cls, name):
+    def find_by_name(cls, name)->"Category":
         return cls.query.filter_by(name=name).first()
 
     def delete_from_db(self):

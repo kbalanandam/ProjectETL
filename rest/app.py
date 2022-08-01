@@ -105,7 +105,7 @@ class CategoryApi(Resource):
         try:
             _category = Category.find_by_name(category)
             if _category:
-                Category.delete_from_db(_category)
+                _category.delete_from_db()
                 return {'messageType': 'Success', "message": "category deleted."}
             return {'messageType': 'Error', 'message': 'category not found'}, 404
 
