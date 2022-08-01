@@ -1,6 +1,5 @@
 from model import db, User, Post, Category, app
-from flask import request, jsonify
-import json
+from flask import jsonify
 from flask_cors import CORS
 from flask_restful import reqparse, Api, Resource
 
@@ -52,9 +51,9 @@ class UserApi(Resource):
 
     def get(self, user):
         try:
-            user = User.find_by_username(user)
-            if user:
-                return User.json()
+            _user = User.find_by_username(user)
+            if _user:
+                return _user.json()
             return {'messageType': 'Error', 'message': 'user not found'}, 404
         except Exception as e:
             return {'messageType': 'Error', 'message': str(e)}, 201
@@ -63,7 +62,7 @@ class UserApi(Resource):
         try:
             _user = User.find_by_username(user)
             if _user:
-                User.delete_from_db(_user)
+                _user.delete_from_db()
                 return {'messageType': 'Success', "message": "user deleted."}
             return {'messageType': 'Error', 'message': 'user not found'}, 404
 
@@ -87,7 +86,7 @@ class CategoriesApi(Resource):
             new.save_to_db()
             return {'messageType': 'Success', 'message': "Category {}, is created successfully.".format(_category['name'])}, 201
         except Exception as e:
-            return {'messageType': 'Error', 'message': 'Error: ' + str(e)}, 500
+            return {'messageType': 'Error', 'message': str(e)}, 500
 
 
 class CategoryApi(Resource):
