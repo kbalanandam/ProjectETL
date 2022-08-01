@@ -36,10 +36,10 @@ class User(db.Model):
     createdby = db.Column(db.String(50))
 
     def json(self):
-        return {'firstname': self.firstname, 'lastname': self.lastname, 'gender': self.gender}
+        return {'user': self.user, 'firstname': self.firstname, 'lastname': self.lastname, 'gender': self.gender}
 
     @classmethod
-    def find_by_username(cls, user):
+    def find_by_username(cls, user)->"User":
         return cls.query.filter_by(user=user).first()
 
     def delete_from_db(self):
